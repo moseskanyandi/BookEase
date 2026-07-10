@@ -1,50 +1,85 @@
-# Welcome to your Expo app 👋
+# BookEase 🚐
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A minibus booking system built with React Native and Expo. Passengers can request rides, and drivers can view and accept booking requests in real time.
 
-## Get started
+## 📱 Overview
 
-1. Install dependencies
+BookEase connects passengers who need a ride with drivers who can fulfill it. Passengers submit a ride request with pickup and destination details, drivers view and accept available requests, and passengers get notified once a driver accepts. Both sides can track the booking through to completion.
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+**Passenger**
+- Login / Sign up
+- Request a ride (pickup & destination)
+- View booking status and history
+- Manage profile
 
-   ```bash
-   npx expo start
-   ```
+**Driver**
+- Login / Sign up
+- View available ride requests
+- Accept bookings
+- Update booking status
+- Manage profile
 
-In the output, you'll find options to open the app in a
+## 🛠 Tech Stack
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **Framework:** React Native (Expo, managed workflow)
+- **Routing:** Expo Router (file-based)
+- **Language:** TypeScript
+- **Auth:** Firebase Authentication
+- **Internationalization:** i18next, react-i18next, expo-localization
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📂 Folder Structure
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+BookEase/
+├── app/              # Expo Router screens (route groups: auth, passenger, driver)
+├── components/       # Reusable UI components
+├── screens/          # Screen-level components
+├── navigation/       # Navigation helpers
+├── services/         # API & Firebase service calls
+├── hooks/            # Custom React hooks
+├── context/          # React Context providers (e.g. Auth state)
+├── constants/        # Theme, colors, static config
+├── utils/            # Helper functions
+├── localization/     # i18n setup & translation files
+├── types/            # TypeScript types/interfaces
+├── api/              # Firebase config / API client setup
+└── assets/           # Images, fonts, icons
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🚀 Getting Started
 
-## Learn more
+### Prerequisites
+- Node.js (LTS)
+- Expo Go app on your phone (for testing) — [iOS](https://apps.apple.com/app/expo-go/id982107779) / [Android](https://play.google.com/store/apps/details?id=host.exp.exponent)
 
-To learn more about developing your project with Expo, look at the following resources:
+### Installation
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+git clone https://github.com/moseskanyandi/BookEase.git
+cd BookEase
+npm install
+```
 
-## Join the community
+### Running the app
 
-Join our community of developers creating universal apps.
+```bash
+npx expo start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+If testing across different networks (e.g. phone on mobile data, laptop on WiFi):
+
+```bash
+npx expo start --tunnel
+```
+
+Scan the QR code with Expo Go (Android) or the Camera app (iOS).
+
+## 📋 Project Status
+
+🚧 In active development — Phase 1 (design) complete, Phase 2 (implementation) in progress.
+
+## 📄 License
+
+This project was built for educational purposes as part of a group internship project.
