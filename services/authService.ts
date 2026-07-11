@@ -5,14 +5,35 @@ import {
   onAuthStateChanged,
   User,
 } from 'firebase/auth';
-import { auth } from '@/api/firebase';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import app, { auth } from '@/api/firebase';
+import { UserRole } from '@/types';
+
+const db = getFirestore(app);
 
 /**
- * Sign up a new user with email and password
+ * Sign up a new user with email and password, then save their profile (role, name, phone)
  */
-export const signUp = async (email: string, password: string) => {
+export const signUp = async (
+  email: string,
+  password: string,
+  role: UserRole,
+  name: string,
+  phone: string
+) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const uid = userCredential.user.uid;
+
+    await setDoc(doc(db, 'users', uid), {
+      uid,
+      email,
+      role,
+      name,
+      phone,
+      createdAt: new Date().toISOString(),
+    });
+
     return { user: userCredential.user, error: null };
   } catch (error: any) {
     return { user: null, error: error.message };

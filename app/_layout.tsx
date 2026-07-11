@@ -7,7 +7,7 @@ import { AuthProvider } from '@/context/AuthContext';
 import '@/localization/i18n';
 
 export const unstable_settings = {
-  anchor: '(auth)',
+  anchor: 'index',
 };
 
 export default function RootLayout() {
@@ -16,11 +16,13 @@ export default function RootLayout() {
     <AuthProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="welcome" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="(passenger)" options={{ headerShown: false }} />
           <Stack.Screen name="(driver)" options={{ headerShown: false }} />
         </Stack>
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
       </ThemeProvider>
     </AuthProvider>
   );

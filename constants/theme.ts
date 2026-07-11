@@ -6,7 +6,7 @@
 import { Platform } from 'react-native';
 
 const primary = '#0F2D6B';
-const secondary = '#F4B400';
+const secondary = '#FECE12';
 
 const tintColorLight = primary;
 const tintColorDark = secondary;
