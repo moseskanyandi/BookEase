@@ -1,0 +1,23 @@
+{
+  "common": {
+    "appName": "BookEase",
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "submit": "Submit"
+  },
+  "auth": {
+    "login": "Log In",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "iAmPassenger": "I'm a Passenger",
+    "iAmDriver": "I'm a Driver"
+  },
+  "booking": {
+    "requestRide": "Request a Ride",
+    "pickup": "Pickup Location",
+    "destination": "Destination",
+    "status": "Status",
+    "history": "Booking History"
+  }
+}
