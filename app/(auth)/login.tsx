@@ -1,27 +1,22 @@
 import { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import { View, Text, Image, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { router, Link } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Colors } from '@/constants/theme';
-import { logIn } from '@/services/authService';
+import { logIn, resetPassword } from '@/services/authService';
+import { showAlert } from '@/utils/alert';
+import InputField from '@/components/common/InputField';
+import PrimaryButton from '@/components/common/PrimaryButton';
 
 export default function LoginScreen() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Missing info', 'Please enter both email and password.');
+      showAlert(t('auth.missingInfoTitle'), t('auth.missingLoginInfo'));
       return;
     }
     setLoading(true);
@@ -29,12 +24,25 @@ export default function LoginScreen() {
     setLoading(false);
 
     if (error) {
-      Alert.alert('Login failed', error);
+      showAlert(t('auth.loginFailedTitle'), error);
       return;
     }
     if (user) {
       router.replace('/(passenger)/home');
     }
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      showAlert(t('auth.enterEmailTitle'), t('auth.enterEmailMessage'));
+      return;
+    }
+    const { error } = await resetPassword(email);
+    if (error) {
+      showAlert(t('auth.loginFailedTitle'), error);
+      return;
+    }
+    showAlert(t('auth.resetSentTitle'), t('auth.resetSentMessage'));
   };
 
   return (
@@ -43,38 +51,36 @@ export default function LoginScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <Image source={require('@/assets/images/logo.png')} style={styles.logo} resizeMode="contain" />
-      <Text style={styles.title}>Welcome Back</Text>
+      <Text style={styles.title}>{t('auth.welcomeBack')}</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email Address"
-        placeholderTextColor="#9CA3AF"
+      <InputField
+        placeholder={t('auth.email')}
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
         keyboardType="email-address"
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#9CA3AF"
+      <InputField
+        placeholder={t('auth.password')}
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
-        <Text style={styles.buttonText}>{loading ? 'Logging in...' : 'Login'}</Text>
-      </TouchableOpacity>
+      <PrimaryButton
+        label={loading ? t('auth.loggingIn') : t('auth.login')}
+        onPress={handleLogin}
+        loading={loading}
+      />
 
-      <TouchableOpacity>
-        <Text style={styles.forgotText}>Forgot Password?</Text>
-      </TouchableOpacity>
+      <Text style={styles.forgotText} onPress={handleForgotPassword}>
+        {t('auth.forgotPassword')}
+      </Text>
 
       <View style={styles.signupRow}>
-        <Text style={styles.signupText}>{"Don't have an account? "}</Text>
+        <Text style={styles.signupText}>{t('auth.dontHaveAccount')}</Text>
         <Link href="/(auth)/signup">
-          <Text style={styles.signupLink}>Sign Up</Text>
+          <Text style={styles.signupLink}>{t('auth.signUp')}</Text>
         </Link>
       </View>
     </KeyboardAvoidingView>
@@ -99,30 +105,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.primary,
     marginBottom: 28,
-  },
-  input: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    fontSize: 15,
-    color: '#111827',
-    marginBottom: 14,
-  },
-  button: {
-    width: '100%',
-    backgroundColor: Colors.secondary,
-    borderRadius: 30,
-    paddingVertical: 16,
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: Colors.primary,
   },
   forgotText: {
     color: Colors.primary,

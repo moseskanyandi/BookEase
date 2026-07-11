@@ -3,9 +3,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   User,
 } from 'firebase/auth';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import app, { auth } from '@/api/firebase';
 import { UserRole } from '@/types';
 
@@ -41,6 +42,21 @@ export const signUp = async (
 };
 
 /**
+ * Fetch a user's profile (role, name, phone) from Firestore
+ */
+export const getUserProfile = async (uid: string) => {
+  try {
+    const docSnap = await getDoc(doc(db, 'users', uid));
+    if (docSnap.exists()) {
+      return { profile: docSnap.data(), error: null };
+    }
+    return { profile: null, error: 'Profile not found' };
+  } catch (error: any) {
+    return { profile: null, error: error.message };
+  }
+};
+
+/**
  * Log in an existing user with email and password
  */
 export const logIn = async (email: string, password: string) => {
@@ -58,6 +74,18 @@ export const logIn = async (email: string, password: string) => {
 export const logOut = async () => {
   try {
     await signOut(auth);
+    return { error: null };
+  } catch (error: any) {
+    return { error: error.message };
+  }
+};
+
+/**
+ * Send a password reset email
+ */
+export const resetPassword = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
     return { error: null };
   } catch (error: any) {
     return { error: error.message };

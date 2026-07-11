@@ -17,7 +17,11 @@ export default function SplashScreen() {
       <Text style={styles.title}>
         Book<Text style={{ color: Colors.secondary }}>Ease</Text>
       </Text>
-      <Text style={styles.tagline}>Ride Easy. Book Smart.</Text>
+      <Text style={styles.tagline}>
+        <Text style={{ color: Colors.secondary }}>— </Text>
+        Ride Easy. Book Smart.
+        <Text style={{ color: Colors.secondary }}> —</Text>
+      </Text>
     </View>
   );
 }

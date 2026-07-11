@@ -1,21 +1,16 @@
 import { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  Alert,
-  ScrollView,
-} from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { router, Link } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { Colors } from '@/constants/theme';
 import { signUp } from '@/services/authService';
 import { UserRole } from '@/types';
+import { showAlert } from '@/utils/alert';
+import InputField from '@/components/common/InputField';
+import PrimaryButton from '@/components/common/PrimaryButton';
 
 export default function SignupScreen() {
+  const { t } = useTranslation();
   const [role, setRole] = useState<UserRole>('passenger');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -28,11 +23,11 @@ export default function SignupScreen() {
 
   const handleSignup = async () => {
     if (!name || !email || !phone || !password || !confirmPassword) {
-      Alert.alert('Missing info', 'Please fill in all fields.');
+      showAlert(t('auth.missingInfoTitle'), t('auth.missingSignupInfo'));
       return;
     }
     if (password !== confirmPassword) {
-      Alert.alert('Password mismatch', 'Passwords do not match.');
+      showAlert(t('auth.passwordMismatchTitle'), t('auth.passwordMismatchMessage'));
       return;
     }
 
@@ -41,7 +36,7 @@ export default function SignupScreen() {
     setLoading(false);
 
     if (error) {
-      Alert.alert('Sign up failed', error);
+      showAlert(t('auth.signupFailedTitle'), error);
       return;
     }
     if (user) {
@@ -52,7 +47,7 @@ export default function SignupScreen() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image source={require('@/assets/images/logo.png')} style={styles.logo} resizeMode="contain" />
-      <Text style={styles.title}>Create Account</Text>
+      <Text style={styles.title}>{t('auth.createAccount')}</Text>
 
       <View style={styles.roleToggle}>
         <TouchableOpacity
@@ -60,7 +55,7 @@ export default function SignupScreen() {
           onPress={() => setRole('passenger')}
         >
           <Text style={[styles.roleText, role === 'passenger' && styles.roleTextActive]}>
-            Passenger
+            {t('auth.passenger')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -68,75 +63,56 @@ export default function SignupScreen() {
           onPress={() => setRole('driver')}
         >
           <Text style={[styles.roleText, role === 'driver' && styles.roleTextActive]}>
-            Driver
+            {t('auth.driver')}
           </Text>
         </TouchableOpacity>
       </View>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Full Name"
-        placeholderTextColor="#9CA3AF"
-        value={name}
-        onChangeText={setName}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email Address"
-        placeholderTextColor="#9CA3AF"
+      <InputField variant="pill" placeholder={t('auth.fullName')} value={name} onChangeText={setName} />
+      <InputField
+        variant="pill"
+        placeholder={t('auth.email')}
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
         keyboardType="email-address"
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Phone Number"
-        placeholderTextColor="#9CA3AF"
+      <InputField
+        variant="pill"
+        placeholder={t('auth.phoneNumber')}
         value={phone}
         onChangeText={setPhone}
         keyboardType="phone-pad"
       />
+      <InputField
+        variant="pill"
+        placeholder={t('auth.password')}
+        value={password}
+        onChangeText={setPassword}
+        isPassword
+        showPassword={showPassword}
+        onTogglePassword={() => setShowPassword(!showPassword)}
+      />
+      <InputField
+        variant="pill"
+        placeholder={t('auth.confirmPassword')}
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        isPassword
+        showPassword={showConfirmPassword}
+        onTogglePassword={() => setShowConfirmPassword(!showConfirmPassword)}
+      />
 
-      <View style={styles.passwordWrapper}>
-        <TextInput
-          style={styles.passwordInput}
-          placeholder="Password"
-          placeholderTextColor="#9CA3AF"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={!showPassword}
-        />
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
-          <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={20} color="#6B7280" />
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.passwordWrapper}>
-        <TextInput
-          style={styles.passwordInput}
-          placeholder="Confirm Password"
-          placeholderTextColor="#9CA3AF"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry={!showConfirmPassword}
-        />
-        <TouchableOpacity
-          onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-          style={styles.eyeIcon}
-        >
-          <Ionicons name={showConfirmPassword ? 'eye-off' : 'eye'} size={20} color="#6B7280" />
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity style={styles.button} onPress={handleSignup} disabled={loading}>
-        <Text style={styles.buttonText}>{loading ? 'Creating account...' : 'Sign Up'}</Text>
-      </TouchableOpacity>
+      <PrimaryButton
+        label={loading ? t('auth.creatingAccount') : t('auth.signUp')}
+        onPress={handleSignup}
+        loading={loading}
+      />
 
       <View style={styles.loginRow}>
-        <Text style={styles.loginText}>Already have an account? </Text>
+        <Text style={styles.loginText}>{t('auth.alreadyHaveAccount')}</Text>
         <Link href="/(auth)/login">
-          <Text style={styles.loginLink}>Login</Text>
+          <Text style={styles.loginLink}>{t('auth.login')}</Text>
         </Link>
       </View>
     </ScrollView>
@@ -187,49 +163,6 @@ const styles = StyleSheet.create({
   },
   roleTextActive: {
     color: '#fff',
-  },
-  input: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    fontSize: 15,
-    color: '#111827',
-    marginBottom: 14,
-  },
-  passwordWrapper: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 30,
-    paddingHorizontal: 20,
-    marginBottom: 14,
-  },
-  passwordInput: {
-    flex: 1,
-    paddingVertical: 14,
-    fontSize: 15,
-    color: '#111827',
-  },
-  eyeIcon: {
-    padding: 4,
-  },
-  button: {
-    width: '100%',
-    backgroundColor: Colors.secondary,
-    borderRadius: 30,
-    paddingVertical: 16,
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: Colors.primary,
   },
   loginRow: {
     flexDirection: 'row',
