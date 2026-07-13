@@ -32,7 +32,10 @@
     "enterEmailTitle": "Entrez votre e-mail",
     "enterEmailMessage": "Veuillez d'abord entrer votre e-mail, puis appuyez à nouveau sur \"Mot de passe oublié ?\".",
     "resetSentTitle": "Vérifiez votre e-mail",
-    "resetSentMessage": "Un lien de réinitialisation du mot de passe a été envoyé à votre adresse e-mail."
+    "resetSentMessage": "Un lien de réinitialisation du mot de passe a été envoyé à votre adresse e-mail.",
+    "passwordWeak": "Mot de passe faible — essayez d'ajouter des chiffres, des symboles ou des majuscules.",
+    "passwordMedium": "Mot de passe de force moyenne.",
+    "passwordStrong": "Mot de passe fort."
   },
   "booking": {
     "requestRide": "Demander un trajet",

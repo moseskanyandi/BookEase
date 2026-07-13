@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, ActivityIndicator, Platform } from 'react-native';
 import { Colors } from '@/constants/theme';
 
 interface PrimaryButtonProps {
@@ -14,6 +14,7 @@ export default function PrimaryButton({ label, onPress, loading = false, disable
       style={[styles.button, (disabled || loading) && styles.buttonDisabled]}
       onPress={onPress}
       disabled={disabled || loading}
+      activeOpacity={0.85}
     >
       {loading ? (
         <ActivityIndicator color={Colors.primary} />
@@ -32,6 +33,20 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     alignItems: 'center',
     marginTop: 8,
+    ...Platform.select({
+      ios: {
+        shadowColor: Colors.primary,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 5,
+      },
+      web: {
+        boxShadow: `0 4px 8px rgba(15, 45, 107, 0.2)`,
+      },
+    }),
   },
   buttonDisabled: {
     opacity: 0.7,

@@ -32,7 +32,10 @@
     "enterEmailTitle": "Enter your email",
     "enterEmailMessage": "Please type your email address first, then tap \"Forgot Password?\" again.",
     "resetSentTitle": "Check your email",
-    "resetSentMessage": "A password reset link has been sent to your email address."
+    "resetSentMessage": "A password reset link has been sent to your email address.",
+    "passwordWeak": "Weak password — try adding numbers, symbols, or capital letters.",
+    "passwordMedium": "Medium strength password.",
+    "passwordStrong": "Strong password."
   },
   "booking": {
     "requestRide": "Request a Ride",

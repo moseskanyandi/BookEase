@@ -2,14 +2,17 @@ import { useState } from 'react';
 import { View, Text, Image, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { router, Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors } from '@/constants/theme';
 import { logIn, resetPassword } from '@/services/authService';
 import { showAlert } from '@/utils/alert';
 import InputField from '@/components/common/InputField';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import LanguageToggle from '@/components/common/LanguageToggle';
 
 export default function LoginScreen() {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -50,6 +53,10 @@ export default function LoginScreen() {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
+      <View style={[styles.languageToggleWrapper, { top: insets.top + 12 }]}>
+        <LanguageToggle />
+      </View>
+
       <Image source={require('@/assets/images/logo.png')} style={styles.logo} resizeMode="contain" />
       <Text style={styles.title}>{t('auth.welcomeBack')}</Text>
 
@@ -95,25 +102,32 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 28,
   },
+  languageToggleWrapper: {
+    position: 'absolute',
+    right: 20,
+    zIndex: 10,
+  },
   logo: {
     width: 110,
     height: 110,
-    marginBottom: 16,
+    marginBottom: 20,
   },
   title: {
-    fontSize: 26,
+    fontSize: 27,
     fontWeight: 'bold',
     color: Colors.primary,
-    marginBottom: 28,
+    marginBottom: 32,
+    letterSpacing: 0.2,
   },
   forgotText: {
     color: Colors.primary,
     fontSize: 14,
-    marginTop: 18,
+    marginTop: 20,
+    fontWeight: '500',
   },
   signupRow: {
     flexDirection: 'row',
-    marginTop: 28,
+    marginTop: 30,
   },
   signupText: {
     color: '#374151',

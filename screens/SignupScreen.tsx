@@ -1,16 +1,20 @@
-import { useState } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useState, useEffect, useRef } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Animated } from 'react-native';
 import { router, Link } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors } from '@/constants/theme';
 import { signUp } from '@/services/authService';
 import { UserRole } from '@/types';
 import { showAlert } from '@/utils/alert';
+import { getPasswordStrength } from '@/utils/passwordStrength';
 import InputField from '@/components/common/InputField';
 import PrimaryButton from '@/components/common/PrimaryButton';
+import LanguageToggle from '@/components/common/LanguageToggle';
 
 export default function SignupScreen() {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const [role, setRole] = useState<UserRole>('passenger');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -20,6 +24,35 @@ export default function SignupScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const passwordStrength = getPasswordStrength(password);
+  const strengthOpacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(strengthOpacity, {
+      toValue: password.length > 0 ? 1 : 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  }, [password]);
+
+  const strengthColor =
+    passwordStrength === 'weak'
+      ? '#DC2626'
+      : passwordStrength === 'medium'
+      ? '#D97706'
+      : passwordStrength === 'strong'
+      ? '#16A34A'
+      : 'transparent';
+
+  const strengthMessage =
+    passwordStrength === 'weak'
+      ? t('auth.passwordWeak')
+      : passwordStrength === 'medium'
+      ? t('auth.passwordMedium')
+      : passwordStrength === 'strong'
+      ? t('auth.passwordStrong')
+      : '';
 
   const handleSignup = async () => {
     if (!name || !email || !phone || !password || !confirmPassword) {
@@ -46,6 +79,10 @@ export default function SignupScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={[styles.languageToggleWrapper, { top: insets.top + 12 }]}>
+        <LanguageToggle />
+      </View>
+
       <Image source={require('@/assets/images/logo.png')} style={styles.logo} resizeMode="contain" />
       <Text style={styles.title}>{t('auth.createAccount')}</Text>
 
@@ -84,6 +121,7 @@ export default function SignupScreen() {
         onChangeText={setPhone}
         keyboardType="phone-pad"
       />
+
       <InputField
         variant="pill"
         placeholder={t('auth.password')}
@@ -93,6 +131,10 @@ export default function SignupScreen() {
         showPassword={showPassword}
         onTogglePassword={() => setShowPassword(!showPassword)}
       />
+      <Animated.View style={{ opacity: strengthOpacity, width: '100%' }}>
+        <Text style={[styles.strengthText, { color: strengthColor }]}>{strengthMessage}</Text>
+      </Animated.View>
+
       <InputField
         variant="pill"
         placeholder={t('auth.confirmPassword')}
@@ -128,23 +170,29 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingBottom: 40,
   },
+  languageToggleWrapper: {
+    position: 'absolute',
+    right: 20,
+    zIndex: 10,
+  },
   logo: {
     width: 110,
     height: 110,
-    marginBottom: 16,
+    marginBottom: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: 'bold',
     color: Colors.primary,
-    marginBottom: 20,
+    marginBottom: 26,
+    letterSpacing: 0.2,
   },
   roleToggle: {
     flexDirection: 'row',
     backgroundColor: '#F3F4F6',
     borderRadius: 30,
     padding: 4,
-    marginBottom: 20,
+    marginBottom: 24,
     width: '100%',
   },
   roleButton: {
@@ -164,9 +212,16 @@ const styles = StyleSheet.create({
   roleTextActive: {
     color: '#fff',
   },
+  strengthText: {
+    fontSize: 12,
+    fontWeight: '500',
+    marginTop: -8,
+    marginBottom: 14,
+    paddingHorizontal: 4,
+  },
   loginRow: {
     flexDirection: 'row',
-    marginTop: 24,
+    marginTop: 26,
   },
   loginText: {
     color: '#374151',
