@@ -6,7 +6,7 @@ import InputField from '@/components/common/InputField';
 import PrimaryButton from '@/components/common/PrimaryButton';
 import LanguageToggle from '@/components/common/LanguageToggle';
 import { useSignup } from '@/hooks/use-signup';
-import { styles } from './signup-screen.styles';
+import { styles } from './styles';
 
 export default function SignupScreen() {
   const { t } = useTranslation();

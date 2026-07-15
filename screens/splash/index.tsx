@@ -2,7 +2,7 @@ import { Image, Text, View } from 'react-native';
 import { Colors } from '@/constants/theme';
 import { BrandStrings } from '@/constants/strings';
 import { useSplash } from '@/hooks/use-splash';
-import { styles } from './splash-screen.styles';
+import { styles } from './styles';
 
 export default function SplashScreen() {
   useSplash();

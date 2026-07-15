@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors } from '@/constants/theme';
 import { UIColors } from '@/constants/colors';
 import { BrandStrings, WelcomeStrings } from '@/constants/strings';
-import { styles } from './welcome-screen.styles';
+import { styles } from './styles';
 
 const features = [
   { icon: 'calendar-check', label: WelcomeStrings.featureEasyBooking },

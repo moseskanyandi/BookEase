@@ -6,7 +6,7 @@ import InputField from '@/components/common/InputField';
 import PrimaryButton from '@/components/common/PrimaryButton';
 import LanguageToggle from '@/components/common/LanguageToggle';
 import { useLogin } from '@/hooks/use-login';
-import { styles } from './login-screen.styles';
+import { styles } from './styles';
 
 export default function LoginScreen() {
   const { t } = useTranslation();
