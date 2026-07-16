@@ -1,24 +1,24 @@
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import {
-  ActivityIndicator,
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
+    ActivityIndicator,
+    Pressable,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    View,
 } from 'react-native';
 
 import { BOOKING_COLORS } from '@/components/booking/constants/booking.constants';
 import {
-  bookingHelpers,
-  filterPassengerBookings,
-  usePassengerBookings,
+    bookingHelpers,
+    filterPassengerBookings,
+    usePassengerBookings,
 } from '@/components/booking/hooks/useBooking';
 import { t } from '@/components/booking/localization/booking.locales';
 import { historyStyles as styles } from '@/components/booking/styles/booking.styles';
 import type { HistoryTab } from '@/components/booking/types/booking.types';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/auth-context';
 
 export default function PassengerHistory() {
   const [tab, setTab] = useState<HistoryTab>('upcoming');

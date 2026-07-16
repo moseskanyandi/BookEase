@@ -58,7 +58,7 @@ export function getNumericIdSeed(id: string): number {
   return parseInt(id.replace(/\D/g, ''), 10) || 42;
 }
 
-export function getStableRouteStats(id: string): RouteStats {
+export function get_stable_route_stats(id: string): RouteStats {
   const numericId = getNumericIdSeed(id);
   const distanceVal = (numericId % 70) / 10 + 2;
   return {
@@ -68,8 +68,8 @@ export function getStableRouteStats(id: string): RouteStats {
   };
 }
 
-export function getStableFare(id: string): string {
-  return getStableRouteStats(id).fare;
+export function get_stable_fare(id: string): string {
+  return get_stable_route_stats(id).fare;
 }
 
 export function getEstimatedFareAmount(id: string): number {

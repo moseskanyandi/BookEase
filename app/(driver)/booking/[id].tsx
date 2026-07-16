@@ -1,30 +1,30 @@
 import { Ionicons } from '@expo/vector-icons';
+import * as Location from 'expo-location';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, type ReactNode } from 'react';
 import {
-  ActivityIndicator,
-  Platform,
-  Pressable,
-  SafeAreaView,
-  Text,
-  View,
+    ActivityIndicator,
+    Platform,
+    Pressable,
+    SafeAreaView,
+    Text,
+    View,
 } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
-import * as Location from 'expo-location';
 
 import {
-  BOOKING_COLORS,
-  DEFAULT_COORDINATES,
-  getStableFare,
-  getStatusBadgeColor,
+    BOOKING_COLORS,
+    DEFAULT_COORDINATES,
+    getStableFare,
+    getStatusBadgeColor,
 } from '@/components/booking/constants/booking.constants';
 import {
-  useBooking,
-  useBookingActions,
+    useBooking,
+    useBookingActions,
 } from '@/components/booking/hooks/useBooking';
 import { t } from '@/components/booking/localization/booking.locales';
 import { driverDetailsStyles as styles } from '@/components/booking/styles/booking.styles';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/auth-context';
 
 const SafeMap =
   Platform.OS === 'web'

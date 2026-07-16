@@ -1,15 +1,15 @@
 import {
-  collection,
   addDoc,
+  collection,
   doc,
-  updateDoc,
-  onSnapshot,
-  query,
-  where,
-  orderBy,
-  Timestamp,
-  getFirestore,
   getDoc,
+  getFirestore,
+  onSnapshot,
+  orderBy,
+  query,
+  Timestamp,
+  updateDoc,
+  where,
 } from 'firebase/firestore';
 
 import app from '@/api/firebase';
@@ -50,7 +50,7 @@ export const createBooking = async (
 /**
  * Driver: accept a pending booking
  */
-export const acceptBooking = async (bookingId: string, driverId: string) => {
+export const accept_booking = async (bookingId: string, driverId: string) => {
   try {
     const bookingDoc = doc(db, 'bookings', bookingId);
     await updateDoc(bookingDoc, {

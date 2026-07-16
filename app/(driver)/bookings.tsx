@@ -1,3 +1,5 @@
+import * as Location from 'expo-location';
+import { useRouter } from 'expo-router';
 import { useEffect, useState, type ReactNode } from 'react';
 import {
   ActivityIndicator,
@@ -10,20 +12,18 @@ import {
   View,
 } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import * as Location from 'expo-location';
-import { useRouter } from 'expo-router';
 
 import {
   BOOKING_COLORS,
   DEFAULT_COORDINATES,
-  getStableRouteStats,
+  get_stable_route_stats,
 } from '@/components/booking/constants/booking.constants';
 import type { Booking } from '@/components/booking/types/booking.types';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/auth-context';
 import {
-  acceptBooking,
-  subscribeToAvailableBookings,
-} from '@/services/bookingService';
+  accept_booking,
+  subscribe_to_available_bookings,
+} from '@/services/booking-service';
 
 const LUSAKA = {
   latitude: DEFAULT_COORDINATES.pickup.latitude,
@@ -54,7 +54,7 @@ export default function BookingsScreen() {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = subscribeToAvailableBookings((data) => {
+    const unsubscribe = subscribe_to_available_bookings((data) => {
       setRequests(data);
       setLoading(false);
     });
@@ -69,7 +69,7 @@ export default function BookingsScreen() {
 
     try {
       setAcceptingId(id);
-      await acceptBooking(id, user.uid);
+      await accept_booking(id, user.uid);
       Alert.alert('Accepted!', 'Ride accepted. Opening booking details.');
       router.push(`/(driver)/booking/${id}`);
     } catch {
@@ -80,7 +80,7 @@ export default function BookingsScreen() {
   };
 
   const renderCard = ({ item }: { item: Booking }) => {
-    const stats = getStableRouteStats(item.id);
+    const stats = get_stable_route_stats(item.id);
     const isAccepting = acceptingId === item.id;
 
     return (
