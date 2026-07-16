@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { User } from 'firebase/auth';
-import { subscribeToAuthChanges } from '@/services/authService';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import app from '@/api/firebase';
+import { subscribeToAuthChanges } from '@/services/auth-service';
+import { User } from 'firebase/auth';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 type UserRole = 'passenger' | 'driver' | null;
 
@@ -58,4 +58,4 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext);
