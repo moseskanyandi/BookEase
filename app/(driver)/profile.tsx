@@ -2,19 +2,19 @@ import { Ionicons } from '@expo/vector-icons';
 import { doc, getFirestore, onSnapshot, setDoc } from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
 import {
-    ActivityIndicator,
-    Alert,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 import app from '@/api/firebase';
 import { BOOKING_COLORS } from '@/components/booking/constants/booking.constants';
 import { useAuth } from '@/context/auth-context';
-import { logOut } from '@/services/authService';
+import { logOut } from '@/services/auth-service';
 
 type DriverFields = {
   name: string;
