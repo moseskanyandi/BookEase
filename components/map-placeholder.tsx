@@ -1,7 +1,8 @@
-import React, { ReactNode } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, radius } from '../constants/theme';
+import React, { ReactNode } from 'react';
+import { Text, View } from 'react-native';
+import { colors } from '../constants/theme';
+import { mapPlaceholderStyles as styles } from './map-placeholder.styles';
 
 interface Props {
   icon?: keyof typeof Ionicons.glyphMap;
@@ -19,15 +20,3 @@ export default function MapPlaceholder({ icon = 'map-outline', label = 'Map goes
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.surface,
-    borderRadius: radius.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: spacing.md,
-  },
-  label: { color: colors.textMuted, marginTop: spacing.xs },
-});

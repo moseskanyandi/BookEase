@@ -1,11 +1,11 @@
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  User,
-} from 'firebase/auth';
 import { auth } from '@/api/firebase';
+import {
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut,
+    User,
+} from 'firebase/auth';
 
 /**
  * Sign up a new user with email and password

@@ -1,13 +1,14 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
-import MapPlaceholder from '../components/MapPlaceholder';
-import PrimaryButton from '../components/PrimaryButton';
-import SavedLocationChip from '../components/SavedLocationChip';
-import { colors, radius, spacing, typography } from '../constants/theme';
-import { useSavedLocations } from '../hooks/useSavedLocations';
+import { FlatList, SafeAreaView, Text, TextInput, View } from 'react-native';
+import MapPlaceholder from '../components/map-placeholder';
+import PrimaryButton from '../components/primary-button';
+import SavedLocationChip from '../components/saved-location-chip';
+import { colors } from '../constants/theme';
+import { useSavedLocations } from '../hooks/use-saved-locations';
 import { t } from '../localization/i18n';
-import { tripService } from '../services/tripService';
+import { tripService } from '../services/trip-service';
+import { bookMinibusScreenStyles as styles } from './book-minibus-screen.styles';
 
 interface Props {
   onBookingConfirmed?: (tripId: string) => void;
@@ -62,17 +63,3 @@ export default function BookMinibusScreen({ onBookingConfirmed }: Props) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background, padding: spacing.md },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacing.md },
-  headerTitle: { ...typography.h1, color: colors.white },
-  avatar: { width: 36, height: 36, borderRadius: radius.full, backgroundColor: colors.surfaceLight },
-  savedRow: { gap: spacing.sm, paddingBottom: spacing.md },
-  inputCard: { backgroundColor: colors.surface, borderRadius: radius.md, padding: spacing.md, marginBottom: spacing.md },
-  inputRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.primary },
-  inputText: { color: colors.white, ...typography.body },
-  divider: { height: 1, backgroundColor: colors.border, marginVertical: spacing.sm },
-  textInput: { flex: 1, color: colors.white, ...typography.body },
-});

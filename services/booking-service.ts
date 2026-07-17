@@ -1,14 +1,15 @@
 import {
-  collection,
-  addDoc,
-  doc,
-  updateDoc,
-  onSnapshot,
-  query,
-  where,
-  orderBy,
-  Timestamp,
- getFirestore } from 'firebase/firestore';
+    addDoc,
+    collection,
+    doc,
+    getFirestore,
+    onSnapshot,
+    orderBy,
+    query,
+    Timestamp,
+    updateDoc,
+    where
+} from 'firebase/firestore';
 
 import app from '@/api/firebase';
 import { Booking, BookingStatus, Location } from '@/types';

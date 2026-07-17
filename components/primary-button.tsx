@@ -1,6 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent, ViewStyle } from 'react-native';
-import { colors, spacing, radius } from '../constants/theme';
+import { GestureResponderEvent, Text, TouchableOpacity, ViewStyle } from 'react-native';
+import { primaryButtonStyles as styles } from './primary-button.styles';
 
 interface Props {
   label: string;
@@ -17,11 +17,3 @@ export default function PrimaryButton({ label, onPress, variant = 'filled', styl
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  base: { borderRadius: radius.md, paddingVertical: spacing.md, alignItems: 'center' },
-  filled: { backgroundColor: colors.primary },
-  filledText: { color: colors.background, fontWeight: '700', fontSize: 16 },
-  outline: { borderWidth: 1, borderColor: colors.border },
-  outlineText: { color: colors.white, fontWeight: '700', fontSize: 16 },
-});

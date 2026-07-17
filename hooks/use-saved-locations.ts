@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { locationService } from '../services/location-service';
 import { SavedLocation } from '../types/location';
-import { locationService } from '../services/locationService';
 
 export function useSavedLocations() {
   const [locations, setLocations] = useState<SavedLocation[]>([]);

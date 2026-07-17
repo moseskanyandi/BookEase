@@ -1,5 +1,5 @@
-import { SavedLocation } from '../types/location';
 import { config } from '../constants/config';
+import { SavedLocation } from '../types/location';
 
 const MOCK_SAVED_LOCATIONS: SavedLocation[] = [
   { id: 'home', label: 'Home', address: 'Woodlands, Lusaka', icon: 'home' },
