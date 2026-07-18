@@ -43,3 +43,6 @@ app-example
 /android
 
 .env
+
+# Ignore app index files (local/dev entrypoints)
+app/index.*
