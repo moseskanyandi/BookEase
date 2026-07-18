@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { subscribeToAuthChanges } from '@/services/auth-service';
 import { User } from 'firebase/auth';
-import { subscribeToAuthChanges } from '@/services/authService';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 type UserRole = 'passenger' | 'driver' | null;
 
