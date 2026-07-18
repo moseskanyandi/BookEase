@@ -1,12 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FlatList, SafeAreaView, Text, TextInput, View } from 'react-native';
 import MapPlaceholder from '../components/map-placeholder';
 import PrimaryButton from '../components/primary-button';
 import SavedLocationChip from '../components/saved-location-chip';
 import { colors } from '../constants/theme';
 import { useSavedLocations } from '../hooks/use-saved-locations';
-import { t } from '../localization/i18n';
 import { tripService } from '../services/trip-service';
 import { bookMinibusScreenStyles as styles } from './book-minibus-screen.styles';
 
@@ -15,6 +15,7 @@ interface Props {
 }
 
 export default function BookMinibusScreen({ onBookingConfirmed }: Props) {
+  const { t } = useTranslation();
   const [destination, setDestination] = useState('');
   const { locations } = useSavedLocations();
 
