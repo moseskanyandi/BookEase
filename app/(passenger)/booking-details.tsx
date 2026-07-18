@@ -1,32 +1,32 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
-    ActivityIndicator,
-    Image,
-    Platform,
-    Pressable,
-    SafeAreaView,
-    Text,
-    View,
+  ActivityIndicator,
+  Image,
+  Platform,
+  Pressable,
+  SafeAreaView,
+  Text,
+  View,
 } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 
 import {
-    BOOKING_COLORS,
-    DEFAULT_CAR_LABEL,
-    DEFAULT_COORDINATES,
-    DEFAULT_DRIVER_AVATAR,
-    formatBookingTime,
-    getEstimatedFareAmount,
-    getStatusBadgeColor,
+  BOOKING_COLORS,
+  DEFAULT_CAR_LABEL,
+  DEFAULT_COORDINATES,
+  DEFAULT_DRIVER_AVATAR,
+  formatBookingTime,
+  getEstimatedFareAmount,
+  getStatusBadgeColor,
 } from '@/components/booking/constants/booking.constants';
 import {
-    useBooking,
-    useBookingActions,
-    useDriverDetails,
+  useBooking,
+  useBookingActions,
+  useDriverDetails,
 } from '@/components/booking/hooks/useBooking';
 import { t } from '@/components/booking/localization/booking.locales';
 import { passengerDetailsStyles as styles } from '@/components/booking/styles/booking.styles';
-import { useAuth } from '@/context/auth-context';
+import { useAuth } from '@/context/AuthContext';
 
 const SafeMap =
   Platform.OS === 'web'

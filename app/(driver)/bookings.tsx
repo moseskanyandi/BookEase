@@ -19,7 +19,7 @@ import {
   get_stable_route_stats,
 } from '@/components/booking/constants/booking.constants';
 import type { Booking } from '@/components/booking/types/booking.types';
-import { useAuth } from '@/context/auth-context';
+import { useAuth } from '@/context/AuthContext';
 import {
   accept_booking,
   subscribe_to_available_bookings,

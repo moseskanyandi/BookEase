@@ -13,7 +13,7 @@ import {
 
 import app from '@/api/firebase';
 import { BOOKING_COLORS } from '@/components/booking/constants/booking.constants';
-import { useAuth } from '@/context/auth-context';
+import { useAuth } from '@/context/AuthContext';
 import { logOut } from '@/services/auth-service';
 
 type DriverFields = {

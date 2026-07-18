@@ -108,3 +108,8 @@ export function formatBookingTime(isoString: string): string {
 export function isUpcomingStatus(status: BookingStatus): boolean {
   return UPCOMING_STATUSES.includes(status);
 }
+
+export const getStableFare = (booking: any) => {
+  // temporary placeholder so it stops erroring
+  return booking?.fare || booking?.estimatedFare || 0;
+};
