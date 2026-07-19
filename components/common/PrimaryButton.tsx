@@ -15,7 +15,7 @@ export default function PrimaryButton({ label, onPress, loading = false, disable
       activeOpacity={0.85}
     >
       {loading ? (
-        <ActivityIndicator color={colors.white} />
+        <ActivityIndicator color={colors.surface} />
       ) : (
         <Text style={styles.buttonText}>{label}</Text>
       )}
@@ -25,14 +25,14 @@ export default function PrimaryButton({ label, onPress, loading = false, disable
 const styles = StyleSheet.create({
   button: {
     width: '100%',
-    backgroundColor: colors.surface,
+    backgroundColor: colors.primary,
     borderRadius: 30,
     paddingVertical: 16,
     alignItems: 'center',
     marginTop: 8,
     ...Platform.select({
       ios: {
-        shadowColor: colors.primary,
+        shadowColor: colors.surface,
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.2,
         shadowRadius: 8,
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: colors.surface,
   },
 });

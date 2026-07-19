@@ -2,7 +2,7 @@ import { Image, ImageBackground, Text, TouchableOpacity, View } from 'react-nati
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import { UIColors } from '@/constants/colors';
 import { BrandStrings, WelcomeStrings } from '@/constants/strings';
 import { styles } from './styles';
@@ -32,12 +32,12 @@ export default function WelcomeScreen() {
           />
           <Text style={styles.title}>
             {BrandStrings.appNamePrefix}
-            <Text style={{ color: Colors.secondary }}>{BrandStrings.appNameSuffix}</Text>
+            <Text style={{ color: colors.primary }}>{BrandStrings.appNameSuffix}</Text>
           </Text>
           <Text style={styles.tagline}>
-            <Text style={{ color: Colors.secondary }}>{BrandStrings.taglineDashLeft}</Text>
+            <Text style={{ color: colors.primary }}>{BrandStrings.taglineDashLeft}</Text>
             {BrandStrings.tagline}
-            <Text style={{ color: Colors.secondary }}>{BrandStrings.taglineDashRight}</Text>
+            <Text style={{ color: colors.primary }}>{BrandStrings.taglineDashRight}</Text>
           </Text>
           <Text style={styles.subHeading}>{WelcomeStrings.subHeading}</Text>
           <Text style={styles.description}>{WelcomeStrings.description}</Text>

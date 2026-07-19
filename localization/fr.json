@@ -1,4 +1,4 @@
-{
+﻿{
   "common": {
     "appName": "BookEase",
     "loading": "Chargement...",
@@ -42,6 +42,13 @@
     "pickup": "Lieu de prise en charge",
     "destination": "Destination",
     "status": "Statut",
-    "history": "Historique des réservations"
-  }
+    "history": "Historique des réservations",
+    "currentLocation": "Position actuelle",
+    "destinationPlaceholder": "Où allez-vous ?",
+    "confirmMinibus": "Confirmer le minibus",
+    "confirming": "Confirmation en cours..."
+  },
+  "error": "Erreur",
+  "mustBeLoggedIn": "Vous devez être connecté.",
+  "bookingFailed": "Échec de la création de la réservation. Veuillez réessayer."
 }

@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import { UIColors } from '@/constants/colors';
-
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primary,
+    backgroundColor: colors.surface,
   },
   backgroundImage: {
     flex: 1,
@@ -73,7 +72,7 @@ export const styles = StyleSheet.create({
     borderRadius: 28,
     backgroundColor: UIColors.navyTranslucent,
     borderWidth: 1.5,
-    borderColor: Colors.secondary,
+    borderColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -89,7 +88,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: colors.primary,
     borderRadius: 12,
     paddingVertical: 16,
     alignItems: 'center',
@@ -102,6 +101,6 @@ export const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: Colors.primary,
+    color: colors.surface,
   },
 });

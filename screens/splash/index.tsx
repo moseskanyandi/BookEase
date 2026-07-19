@@ -1,5 +1,5 @@
 import { Image, Text, View } from 'react-native';
-import { Colors } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import { BrandStrings } from '@/constants/strings';
 import { useSplash } from '@/hooks/use-splash';
 import { styles } from './styles';
@@ -16,12 +16,12 @@ export default function SplashScreen() {
       />
       <Text style={styles.title}>
         {BrandStrings.appNamePrefix}
-        <Text style={{ color: Colors.secondary }}>{BrandStrings.appNameSuffix}</Text>
+        <Text style={{ color: colors.primary }}>{BrandStrings.appNameSuffix}</Text>
       </Text>
       <Text style={styles.tagline}>
-        <Text style={{ color: Colors.secondary }}>{BrandStrings.taglineDashLeft}</Text>
+        <Text style={{ color: colors.primary }}>{BrandStrings.taglineDashLeft}</Text>
         {BrandStrings.tagline}
-        <Text style={{ color: Colors.secondary }}>{BrandStrings.taglineDashRight}</Text>
+        <Text style={{ color: colors.primary }}>{BrandStrings.taglineDashRight}</Text>
       </Text>
     </View>
   );

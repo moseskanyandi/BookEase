@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import { UIColors } from '@/constants/colors';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primary,
+    backgroundColor: colors.surface,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
