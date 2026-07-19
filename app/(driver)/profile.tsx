@@ -14,7 +14,7 @@ import {
 import app from '@/api/firebase';
 import { BOOKING_COLORS } from '@/components/booking/constants/booking.constants';
 import { useAuth } from '@/context/AuthContext';
-import { logOut } from '@/services/auth-service';
+import { logOut } from '@/services/authService';
 
 type DriverFields = {
   name: string;
