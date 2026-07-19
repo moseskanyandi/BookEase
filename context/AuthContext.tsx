@@ -1,3 +1,4 @@
+
 import { getUserProfile, subscribeToAuthChanges } from '@/services/authService';
 import { User } from 'firebase/auth';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
