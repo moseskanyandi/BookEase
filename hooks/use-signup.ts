@@ -99,7 +99,7 @@ export function useSignup(): UseSignupReturn {
       return;
     }
     if (user) {
-      router.replace(role === 'driver' ? '/(driver)/home' : '/(passenger)/home');
+      router.replace(role === 'driver' ? '/(driver)/home' : '/(passenger)');
     }
   };
 
