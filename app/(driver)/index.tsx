@@ -17,7 +17,7 @@ export default function DriverHome() {
   )
 }
 
-const COLORS = { primary: '#0A1F44', secondary: '#FACC15', gray: '#6B7280' }
+const COLORS = { primary: '#0F2D6B', secondary: '#FAB400', gray: '#6B7280' }
 
 const styles = StyleSheet.create({
   container: {

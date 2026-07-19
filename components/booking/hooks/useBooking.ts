@@ -4,15 +4,15 @@ import { Alert } from 'react-native';
 import {
   formatBookingDate,
   getEstimatedFareAmount,
-  getStableFare,
-  getStableRouteStats,
+  get_stable_fare,
+  get_stable_route_stats,
   getStatusBadgeColor,
   getStatusColor,
   isUpcomingStatus,
 } from '../constants/booking.constants';
 import { t } from '../localization/booking.locales';
 import {
-  acceptBooking,
+  accept_booking,
   getDriverProfile,
   subscribeToBooking,
   subscribeToPassengerBookings,
@@ -162,7 +162,7 @@ export function useBookingActions(bookingId: string | undefined) {
 
     try {
       setSubmitting(true);
-      const { error } = await acceptBooking(bookingId, driverId);
+      const { error } = await accept_booking(bookingId, driverId);
       if (error) {
         Alert.alert(t('error'), error);
         return;
@@ -209,8 +209,8 @@ export function useBookingActions(bookingId: string | undefined) {
 export const bookingHelpers = {
   formatBookingDate,
   getEstimatedFareAmount,
-  getStableFare,
-  getStableRouteStats,
+  get_stable_fare,
+  get_stable_route_stats,
   getStatusBadgeColor,
   getStatusColor,
   isUpcomingStatus,

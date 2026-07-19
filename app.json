@@ -26,7 +26,8 @@
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION"
-      ]
+      ],
+      "package": "com.bookease.app"
     },
     "web": {
       "output": "static",
@@ -51,6 +52,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d4aca1d3-34a2-4987-a2a1-5cc5f8a03205"
+      }
     }
   }
 }

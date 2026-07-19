@@ -1,4 +1,5 @@
-import { subscribeToAuthChanges } from '@/services/auth-service';
+
+import { getUserProfile, subscribeToAuthChanges } from '@/services/authService';
 import { User } from 'firebase/auth';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
@@ -24,8 +25,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = subscribeToAuthChanges((firebaseUser) => {
+    const unsubscribe = subscribeToAuthChanges(async (firebaseUser) => {
+      setLoading(true);
       setUser(firebaseUser);
+      if (firebaseUser) {
+        const { profile } = await getUserProfile(firebaseUser.uid);
+        if (profile) {
+          setRole(profile.role);
+        } else {
+          setRole(null);
+        }
+      } else {
+        setRole(null);
+      }
       setLoading(false);
     });
     return unsubscribe;
