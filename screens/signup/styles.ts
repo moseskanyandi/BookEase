@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import { UIColors } from '@/constants/colors';
 
 export const styles = StyleSheet.create({
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: Colors.primary,
+    color: colors.surface,
     marginBottom: 26,
     letterSpacing: 0.2,
   },
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   roleButtonActive: {
-    backgroundColor: Colors.primary,
+    backgroundColor: colors.surface,
   },
   roleText: {
     fontSize: 14,
@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
   },
   loginLink: {
-    color: Colors.primary,
+    color: colors.surface,
     fontWeight: 'bold',
     fontSize: 14,
   },

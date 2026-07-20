@@ -1,4 +1,4 @@
-import { Colors } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import { changeAppLanguage } from '@/localization/i18n';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   optionActive: {
-    backgroundColor: Colors.primary,
+    backgroundColor: colors.surface,
   },
   text: {
     fontSize: 12,

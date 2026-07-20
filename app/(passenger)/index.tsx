@@ -16,7 +16,7 @@ export default function PassengerHome() {
 
       <TouchableOpacity
         style={styles.bookButton}
-        onPress={() => router.push('/(passenger)/booking-details')}
+        onPress={() => router.push('/(passenger)/book' as any)}
       >
         <Ionicons name="car" size={24} color={BOOKING_COLORS.navy} />
         <Text style={styles.bookButtonText}>{t('bookARide')}</Text>

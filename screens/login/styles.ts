@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '@/constants/theme';
+import { colors } from '@/constants/theme';
 import { UIColors } from '@/constants/colors';
 
 export const styles = StyleSheet.create({
@@ -23,12 +23,12 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 27,
     fontWeight: 'bold',
-    color: Colors.primary,
+    color: colors.surface,
     marginBottom: 32,
     letterSpacing: 0.2,
   },
   forgotText: {
-    color: Colors.primary,
+    color: colors.surface,
     fontSize: 14,
     marginTop: 20,
     fontWeight: '500',
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
   },
   signupLink: {
-    color: Colors.primary,
+    color: colors.surface,
     fontWeight: 'bold',
     fontSize: 14,
   },

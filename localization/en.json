@@ -1,4 +1,4 @@
-{
+﻿{
   "common": {
     "appName": "BookEase",
     "loading": "Loading...",
@@ -42,6 +42,13 @@
     "pickup": "Pickup Location",
     "destination": "Destination",
     "status": "Status",
-    "history": "Booking History"
-  }
+    "history": "Booking History",
+    "currentLocation": "Current Location",
+    "destinationPlaceholder": "Where are you going?",
+    "confirmMinibus": "Confirm Minibus",
+    "confirming": "Confirming..."
+  },
+  "error": "Error",
+  "mustBeLoggedIn": "You must be logged in.",
+  "bookingFailed": "Failed to create booking. Please try again."
 }

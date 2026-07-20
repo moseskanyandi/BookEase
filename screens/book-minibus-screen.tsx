@@ -1,38 +1,59 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, SafeAreaView, Text, TextInput, View } from 'react-native';
+import { Alert, FlatList, SafeAreaView, Text, TextInput, View } from 'react-native';
 import MapPlaceholder from '../components/map-placeholder';
 import PrimaryButton from '../components/primary-button';
 import SavedLocationChip from '../components/saved-location-chip';
+import { DEFAULT_COORDINATES } from '../components/booking/constants/booking.constants';
+import { createBooking } from '../components/booking/services/bookingService';
 import { colors } from '../constants/theme';
+import { useAuth } from '../context/AuthContext';
 import { useSavedLocations } from '../hooks/use-saved-locations';
-import { tripService } from '../services/trip-service';
 import { bookMinibusScreenStyles as styles } from './book-minibus-screen.styles';
-
 interface Props {
-  onBookingConfirmed?: (tripId: string) => void;
+  onBookingConfirmed?: (bookingId: string) => void;
 }
-
 export default function BookMinibusScreen({ onBookingConfirmed }: Props) {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [destination, setDestination] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const { locations } = useSavedLocations();
-
   const handleConfirm = async () => {
-    const { tripId } = await tripService.confirmBooking({ destination });
-    onBookingConfirmed?.(tripId);
+    if (!user) {
+      Alert.alert(t('error'), t('mustBeLoggedIn'));
+      return;
+    }
+    if (!destination.trim()) {
+      return;
+    }
+    setSubmitting(true);
+    const pickup = {
+      address: t('booking.currentLocation'),
+      latitude: DEFAULT_COORDINATES.pickup.latitude,
+      longitude: DEFAULT_COORDINATES.pickup.longitude,
+    };
+    const destinationLocation = {
+      address: destination.trim(),
+      latitude: DEFAULT_COORDINATES.destination.latitude,
+      longitude: DEFAULT_COORDINATES.destination.longitude,
+    };
+    const { id, error } = await createBooking(user.uid, pickup, destinationLocation);
+    setSubmitting(false);
+    if (error || !id) {
+      Alert.alert(t('error'), error || t('bookingFailed'));
+      return;
+    }
+    onBookingConfirmed?.(id);
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>{t('common.appName')}</Text>
         <View style={styles.avatar} />
       </View>
-
       <MapPlaceholder />
-
       <FlatList
         horizontal
         data={locations}
@@ -41,7 +62,6 @@ export default function BookMinibusScreen({ onBookingConfirmed }: Props) {
         contentContainerStyle={styles.savedRow}
         renderItem={({ item }) => <SavedLocationChip location={item} />}
       />
-
       <View style={styles.inputCard}>
         <View style={styles.inputRow}>
           <View style={styles.dot} />
@@ -59,8 +79,12 @@ export default function BookMinibusScreen({ onBookingConfirmed }: Props) {
           />
         </View>
       </View>
-
-      <PrimaryButton label={t('booking.confirmMinibus')} onPress={handleConfirm} />
+      <PrimaryButton
+        label={submitting ? t('booking.confirming') : t('booking.confirmMinibus')}
+        onPress={handleConfirm}
+        loading={submitting}
+        disabled={submitting || !destination.trim()}
+      />
     </SafeAreaView>
   );
 }
